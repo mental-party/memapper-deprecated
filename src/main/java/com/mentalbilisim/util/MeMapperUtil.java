@@ -1,11 +1,19 @@
 package com.mentalbilisim.util;
 
+import java.lang.reflect.Field;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Field;
-import java.util.*;
-import java.util.stream.Collectors;
+
 
 /**
  * author @er-han on 3/30/2017.
