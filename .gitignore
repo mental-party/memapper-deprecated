@@ -11,5 +11,4 @@ build/
 
 ## Plugin-specific files:
 # IntelliJ
-.idea/
-
+/.idea/
