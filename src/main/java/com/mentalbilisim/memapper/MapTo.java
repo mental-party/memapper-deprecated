@@ -10,8 +10,8 @@ import java.util.function.Supplier;
  * This interface is used in MeMapper class to
  * supply more readible code.
  */
-public interface MapTo {
-  <TargetT> Optional<TargetT> mapTo(Class<TargetT> targetType);
+public interface MapTo<TargetT> {
+   Optional<TargetT> mapTo(Class<TargetT> targetType);
 
-  <TargetT> TargetT mapTo(Supplier<TargetT> supplier);
+   TargetT mapTo(Supplier<TargetT> supplier);
 }

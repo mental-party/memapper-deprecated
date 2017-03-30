@@ -9,7 +9,7 @@ import java.util.function.Supplier;
  * Mapper is used for mapping from a SourceT source object
  * to a TargetT object in an easy and readible way.
  */
-public class MeMapper<SourceT, TargetT> implements MapTo, MapToList {
+public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<TargetT> {
   private SourceT source;
   private Iterable<SourceT> sources;
 
@@ -57,7 +57,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo, MapToList {
    * @return a List of newly instantiated objects of type TargetT, wrapped in Optional, mapped from source object.
    */
   @Override
-  public <TargetT> Optional<Iterable<TargetT>> mapToList(Class<TargetT> targetType) {
+  public Optional<Iterable<TargetT>> mapToList(Class<TargetT> targetType) {
     try {
       return Optional.ofNullable(MapByFieldNameUtil.map(sources, targetType));
     } catch (Exception e) {
@@ -74,7 +74,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo, MapToList {
    * @return a List of TargetT objects</>, mapped from source objects.
    */
   @Override
-  public <TargetT> Iterable<TargetT> mapToList(Supplier<TargetT> supplier) {
+  public Iterable<TargetT> mapToList(Supplier<TargetT> supplier) {
     return MapByFieldNameUtil.map(sources, supplier);
   }
 
@@ -90,7 +90,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo, MapToList {
    * @return a newly instantiated object of type T wrapped in Optional</>, mapped from source object.
    */
   @Override
-  public <TargetT> Optional<TargetT> mapTo(Class<TargetT> targetType) {
+  public Optional<TargetT> mapTo(Class<TargetT> targetType) {
     try {
       return Optional.ofNullable(MapByFieldNameUtil.map(source, targetType));
     } catch (Exception e) {
@@ -108,7 +108,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo, MapToList {
    * @return a TargetT object, mapped from source object.
    */
   @Override
-  public <TargetT> TargetT mapTo(Supplier<TargetT> supplier) {
+  public TargetT mapTo(Supplier<TargetT> supplier) {
     return MapByFieldNameUtil.map(source, supplier);
   }
 }

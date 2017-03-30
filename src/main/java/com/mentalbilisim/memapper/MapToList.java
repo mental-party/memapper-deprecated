@@ -8,8 +8,8 @@ import java.util.function.Supplier;
  * This interface is used in MeMapper class to
  * supply more readible code.
  */
-public interface MapToList {
-  <TargetT> Optional<Iterable<TargetT>> mapToList(Class<TargetT> targetType);
+public interface MapToList <TargetT> {
+  Optional<Iterable<TargetT>> mapToList(Class<TargetT> targetType);
 
-  <TargetT> Iterable<TargetT> mapToList(Supplier<TargetT> supplier);
+  Iterable<TargetT> mapToList(Supplier<TargetT> supplier);
 }
