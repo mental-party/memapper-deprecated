@@ -4,10 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -46,5 +43,27 @@ public class MeMapperUtil {
     fields.addAll(fieldsOfCurrent);
 
     return fields;
+  }
+
+  /**
+   * Extracts a map of fields in given T object.
+   * If given object type has a super class,
+   * the fields derived from the super class is extracted too.
+   *
+   * @param source The object which's fields are wanted to be extracted.
+   * @return a Map object which contains extracted fields names and values from the given object
+   * @throws IllegalAccessException throws this when can't get one of the field's value of source.
+   */
+  public static <T> Map<String, Object> getFieldsMap(final T source)
+      throws IllegalAccessException {
+    final Map<String, Object> map = new HashMap<>();
+    final List<Field> fields = getAllFields(source.getClass());
+    for (final Field field : fields) {
+      final boolean isFieldAccessible = field.isAccessible();
+      field.setAccessible(true);
+      map.put(field.getName(), field.get(source));
+      field.setAccessible(isFieldAccessible);
+    }
+    return map;
   }
 }
