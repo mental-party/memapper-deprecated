@@ -92,7 +92,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo, MapToList {
   @Override
   public <TargetT> Optional<TargetT> mapTo(Class<TargetT> targetType) {
     try {
-      return Optional.ofNullable(MapByFieldNameUtil.map(source, targetType))
+      return Optional.ofNullable(MapByFieldNameUtil.map(source, targetType));
     } catch (Exception e) {
       return Optional.empty();
     }
