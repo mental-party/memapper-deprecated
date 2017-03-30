@@ -1,6 +1,6 @@
-package com.mentalbilisim.util;
+package com.mentalbilisim.memapper.util;
 
-import com.mentalbilisim.exception.TargetTypeInstantiationException;
+import com.mentalbilisim.memapper.exception.TargetTypeInstantiationException;
 
 import java.lang.reflect.Field;
 

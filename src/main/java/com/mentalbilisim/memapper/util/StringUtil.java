@@ -1,4 +1,4 @@
-package com.mentalbilisim.util;
+package com.mentalbilisim.memapper.util;
 
 /**
  * author @er-han on 3/30/2017.

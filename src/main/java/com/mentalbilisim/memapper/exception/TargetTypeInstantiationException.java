@@ -1,4 +1,4 @@
-package com.mentalbilisim.exception;
+package com.mentalbilisim.memapper.exception;
 
 /**
  * author @er-han on 3/30/2017.
