@@ -11,7 +11,7 @@ import java.util.function.Supplier;
  * supply more readible code.
  */
 public interface MapTo {
-  <T> Optional<T> mapTo(Class<T> targetType);
+  <SourceT> Optional<SourceT> mapTo(Class<SourceT> targetType);
 
-  <T> T mapTo(Supplier<T> supplier);
+  <SourceT> SourceT mapTo(Supplier<SourceT> supplier);
 }

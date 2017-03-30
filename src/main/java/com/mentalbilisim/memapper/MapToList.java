@@ -9,7 +9,7 @@ import java.util.function.Supplier;
  * supply more readible code.
  */
 public interface MapToList {
-  <T> Optional<Iterable<T>> mapToList(Class<T> resultType);
+  <SourceT> Optional<Iterable<SourceT>> mapToList(Class<SourceT> resultType);
 
-  <T> Iterable<T> mapToList(Supplier<T> supplier);
+  <SourceT> Iterable<SourceT> mapToList(Supplier<SourceT> supplier);
 }
