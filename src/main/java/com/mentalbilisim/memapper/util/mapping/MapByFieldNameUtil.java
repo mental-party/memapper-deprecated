@@ -1,86 +1,26 @@
-package com.mentalbilisim.memapper.util;
+package com.mentalbilisim.memapper.util.mapping;
 
 import com.mentalbilisim.memapper.exception.TargetTypeInstantiationException;
+import com.mentalbilisim.memapper.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
  * author @er-han on 3/30/2017.
  */
-public class MeMapperUtil {
-  private static final Logger logger = LoggerFactory.getLogger(MeMapperUtil.class);
+public class MapByFieldNameUtil {
 
-  /**
-   * Gets all public, private, protected fields of the given type.
-   * If the given type has superclass, gets it's fields too using recursive call of self.
-   *
-   * @param type The type which's fields will be returned.
-   * @return List of the fields of the given type.
-   */
-  public static List<Field> getAllFields(Class<?> type) {
-    List<Field> fields = new ArrayList<>();
-    if (type.getSuperclass() != null) {
-      List<Field> fieldsOfSuper = getAllFields(type.getSuperclass());
-      fields.addAll(fieldsOfSuper);
-    }
-
-    List<Field> fieldsOfCurrent = Arrays.stream(type.getDeclaredFields())
-        .map(field -> {
-          Iterator<Field> iterator = fields.iterator();
-          while (iterator.hasNext()) {
-            Field tempField = iterator.next();
-            if (tempField.getName().equals(field.getName())) {
-              iterator.remove();
-              break;
-            }
-          }
-          return field;
-        }).collect(Collectors.toList());
-
-    fields.addAll(fieldsOfCurrent);
-
-    return fields;
-  }
-
-  /**
-   * Extracts a map of fields in given T object.
-   * If given object type has a super class,
-   * the fields derived from the super class is extracted too.
-   *
-   * @param source The object which's fields are wanted to be extracted.
-   * @return a Map object which contains extracted fields names and values from the given object
-   * @throws IllegalAccessException throws this when can't get one of the field's value of source.
-   */
-  public static <T> Map<String, Object> getFieldsMap(final T source)
-      throws IllegalAccessException {
-    final Map<String, Object> map = new HashMap<>();
-    final List<Field> fields = getAllFields(source.getClass());
-    for (final Field field : fields) {
-      final boolean isFieldAccessible = field.isAccessible();
-      field.setAccessible(true);
-      map.put(field.getName(), field.get(source));
-      field.setAccessible(isFieldAccessible);
-    }
-    return map;
-  }
-
+  private static final Logger logger = LoggerFactory.getLogger(MapByFieldNameUtil.class);
 
   /**
    * Maps given source object's suitable fields
@@ -135,12 +75,12 @@ public class MeMapperUtil {
       return null;
     }
     Class<?> sourceType = source.getClass();
-    List<Field> sourceFields = getAllFields(sourceType);
+    List<Field> sourceFields = CommonMapUtil.getAllFields(sourceType);
 
     logger.debug("Found fields in the source type: " + sourceFields);
 
     Class<?> targetType = target.getClass();
-    List<Field> targetFields = getAllFields(targetType);
+    List<Field> targetFields = CommonMapUtil.getAllFields(targetType);
 
     logger.debug("Found fields in the target type: " + targetFields);
 
