@@ -28,6 +28,18 @@ public class CommonMapUtil {
    * @return List of the fields of the given type.
    */
   public static List<Field> getAllFields(Class<?> type) {
+    return getAllFields(type, true);
+  }
+
+  /**
+   * Gets all public, private, protected fields of the given type.
+   *
+   * @param type The type which's fields will be returned.
+   * @param includeSuperFields if false, fields of superclass will not be included;
+   *                           if true, fields of superclass will be included.
+   * @return List of the fields of the given type.
+   */
+  public static List<Field> getAllFields(Class<?> type, boolean includeSuperFields) {
     List<Field> fields = new ArrayList<>();
     if (type.getSuperclass() != null) {
       List<Field> fieldsOfSuper = getAllFields(type.getSuperclass());
@@ -52,6 +64,7 @@ public class CommonMapUtil {
     return fields;
   }
 
+
   /**
    * Extracts a map of fields in given T object.
    * If given object type has a super class,
@@ -63,8 +76,22 @@ public class CommonMapUtil {
    */
   public static <T> Map<String, Object> getFieldsMap(final T source)
       throws IllegalAccessException {
+    return getFieldsMap(source, true);
+  }
+
+  /**
+   * Extracts a map of fields in given T object.
+   *
+   * @param source The object which's fields are wanted to be extracted.
+   * @param includeSuperFields if false, fields of superclass will not be included;
+   *                           if true, fields of superclass will be included.
+   * @return a Map object which contains extracted fields names and values from the given object
+   * @throws IllegalAccessException throws this when can't get one of the field's value of source.
+   */
+  public static <T> Map<String, Object> getFieldsMap(final T source, boolean includeSuperFields)
+      throws IllegalAccessException {
     final Map<String, Object> map = new HashMap<>();
-    final List<Field> fields = getAllFields(source.getClass());
+    final List<Field> fields = getAllFields(source.getClass(), includeSuperFields);
     for (final Field field : fields) {
       final boolean isFieldAccessible = field.isAccessible();
       field.setAccessible(true);
