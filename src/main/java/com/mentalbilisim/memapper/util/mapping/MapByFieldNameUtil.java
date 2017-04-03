@@ -169,8 +169,20 @@ public class MapByFieldNameUtil {
     return target;
   }
 
+  /**
+   * Maps given source object's suitable fields
+   * to a newly instantiated object of type targetType.
+   * @param source    the object which's fields will be taken as map source.
+   * @param supplier  the supplier which will be used to instantiate a target object.
+   * @param <SourceT>  source object' type.
+   * @param <TargetT>  target object's type.
+   * @return an object of type targetType.
+   */
   public static <SourceT, TargetT> TargetT map(SourceT source,
                                                Supplier<TargetT> supplier) {
+    if (supplier == null) {
+      return null;
+    }
     return map(source, supplier.get());
   }
 
