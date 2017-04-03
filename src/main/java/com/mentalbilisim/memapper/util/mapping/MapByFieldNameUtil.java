@@ -37,6 +37,9 @@ public class MapByFieldNameUtil {
                                                Class<TargetT> targetType)
       throws TargetTypeInstantiationException {
 
+    if (source == null) {
+      return null;
+    }
 
     Class<?> sourceType = source.getClass();
     logger.debug("Started mapping from source type '"

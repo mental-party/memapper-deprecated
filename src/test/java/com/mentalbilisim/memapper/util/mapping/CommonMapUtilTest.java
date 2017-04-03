@@ -19,14 +19,7 @@ import org.junit.Test;
 
 public class CommonMapUtilTest {
 
-  private static final Integer ID = 31648;
-  private static final String TITLE = "TITLE";
-  private static final String FIRST_NAME = "FIRST_NAME";
-  private static final String MIDDLE_NAME = "MIDDLE_NAME";
-  private static final String LAST_NAME = "LAST_NAME";
-  private static final EnumGender GENDER = EnumGender.FEMALE;
-  private static final List<String> LESSONS = Arrays.asList("a", "b", "c", "d", "e");
-  private static final Double SALARY = 5246.67;
+
 
   @Test
   public void shouldIncludeSuperFields_whenIncludeSuperFieldsIsTrue() {
@@ -86,17 +79,5 @@ public class CommonMapUtilTest {
   }
 
 
-  private TeacherPersonTo prepareTeacher() {
-    TeacherPersonTo teacher = new TeacherPersonTo();
-
-    teacher.setId(ID);
-    teacher.setTitle(TITLE);
-    teacher.setName(new NameTo(FIRST_NAME, MIDDLE_NAME, LAST_NAME));
-    teacher.setLessons(LESSONS);
-    teacher.setSalary(SALARY);
-    teacher.setGender(GENDER);
-
-    return teacher;
-  }
 
 }
