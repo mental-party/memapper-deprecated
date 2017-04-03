@@ -11,6 +11,7 @@ import com.mentalbilisim.memapper.to.TeacherPersonTo;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.junit.Test;
 
@@ -82,8 +83,7 @@ public class MapByFieldNameUtilTest {
   }
 
   @Test
-  public void shouldReturnNull_whenTargetObjectIsGivenAndSourceObjectIsNull()
-      throws TargetTypeInstantiationException {
+  public void shouldReturnNull_whenTargetObjectIsGivenAndSourceObjectIsNull() {
     TeacherPersonTo teacherPersonTo = null;
     TargetPersonTo targetPersonTo = new TargetPersonTo();
 
@@ -93,8 +93,7 @@ public class MapByFieldNameUtilTest {
   }
 
   @Test
-  public void shouldReturnNull_whenTargetObjectIsGivenAndTargetObjectIsNull()
-      throws TargetTypeInstantiationException {
+  public void shouldReturnNull_whenTargetObjectIsGivenAndTargetObjectIsNull() {
     TeacherPersonTo teacherPersonTo = prepareTeacher();
     TargetPersonTo targetPersonTo = null;
 
@@ -104,8 +103,7 @@ public class MapByFieldNameUtilTest {
   }
 
   @Test
-  public void shouldReturnNull_whenTargetObjectIsGivenAndTargetObjectAndSourceIsNull()
-      throws TargetTypeInstantiationException {
+  public void shouldReturnNull_whenTargetObjectIsGivenAndTargetObjectAndSourceIsNull() {
     TeacherPersonTo teacherPersonTo = null;
     TargetPersonTo targetPersonTo = null;
 
@@ -114,6 +112,20 @@ public class MapByFieldNameUtilTest {
     assertNull(targetPersonTo);
   }
 
+  @Test
+  public void shouldMapAllFieldsWithSameName_whenTargetSupplierIsGiven() {
+    TeacherPersonTo teacherPersonTo = prepareTeacher();
+
+    final Supplier<TargetPersonTo> supplier = TargetPersonTo::new;
+    TargetPersonTo targetPersonTo = MapByFieldNameUtil.map(teacherPersonTo, supplier);
+
+    assertEquals(teacherPersonTo.getId(), targetPersonTo.getId());
+    assertEquals(teacherPersonTo.getLessons(), targetPersonTo.getLessons());
+    assertEquals(teacherPersonTo.getSalary(), targetPersonTo.getSalary());
+    assertEquals(teacherPersonTo.getGender(), targetPersonTo.getGender());
+    assertEquals(teacherPersonTo.getTitle(), targetPersonTo.getTitle());
+    assertEquals(teacherPersonTo.getName(), targetPersonTo.getName());
+  }
 
 
   private TeacherPersonTo prepareTeacher() {
