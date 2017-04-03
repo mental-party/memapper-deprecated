@@ -1,5 +1,7 @@
 package com.mentalbilisim.memapper.util;
 
+import java.util.Random;
+
 /**
  * author @er-han on 3/30/2017.
  */
@@ -21,5 +23,22 @@ public class StringUtil {
       stringBuilder.append(str.substring(1));
     }
     return stringBuilder.toString();
+  }
+
+  /**
+   * Generates random string.
+   * @param length desired length of string.
+   * @return randomly generated string.
+   */
+  public static String generateRandomString(int length) {
+    char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+    StringBuilder sb = new StringBuilder();
+    Random random = new Random();
+    for (int i = 0; i < length; i++) {
+      char c = chars[random.nextInt(chars.length)];
+      sb.append(c);
+    }
+    String output = sb.toString();
+    return output;
   }
 }
