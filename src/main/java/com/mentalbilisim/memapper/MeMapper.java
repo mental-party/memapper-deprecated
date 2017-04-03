@@ -53,8 +53,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
    *                   Target type must have a public no-arg
    *                   constructor. Otherwise a TargetTypeInstantiationException
    *                   will be thrown.
-   * @param <TargetT>  Target type
-   * @return a List of newly instantiated objects of type TargetT, wrapped in Optional, mapped from source object.
+   * @return Optional&lt;Iterable&ltTargetT&gt;&gt;
    */
   @Override
   public Optional<Iterable<TargetT>> mapToList(Class<TargetT> targetType) {
@@ -70,8 +69,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
    * to newly instantiated objects of the given TargetT.
    *
    * @param supplier Target object's Supplier.
-   * @param <TargetT>  Target type
-   * @return a List of TargetT objects</>, mapped from source objects.
+   * @return a List of TargetT objects, mapped from source objects.
    */
   @Override
   public Iterable<TargetT> mapToList(Supplier<TargetT> supplier) {
@@ -86,8 +84,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
    *                   Target type must have a public no-arg
    *                   constructor. Otherwise a TargetTypeInstantiationException
    *                   will be thrown.
-   * @param <TargetT>  Target type
-   * @return a newly instantiated object of type T wrapped in Optional</>, mapped from source object.
+   * @return Optional&lt;TargetT&gt;.
    */
   @Override
   public Optional<TargetT> mapTo(Class<TargetT> targetType) {
@@ -104,7 +101,6 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
    * to newly instantiated objects of the given TargetT.
    *
    * @param supplier Target object's Supplier.
-   * @param <TargetT>  Target type
    * @return a TargetT object, mapped from source object.
    */
   @Override

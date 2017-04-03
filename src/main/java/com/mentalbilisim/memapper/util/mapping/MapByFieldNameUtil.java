@@ -2,8 +2,6 @@ package com.mentalbilisim.memapper.util.mapping;
 
 import com.mentalbilisim.memapper.exception.TargetTypeInstantiationException;
 import com.mentalbilisim.memapper.util.StringUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -14,6 +12,8 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * author @er-han on 3/30/2017.
