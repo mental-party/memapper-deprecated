@@ -127,6 +127,16 @@ public class MapByFieldNameUtilTest {
     assertEquals(teacherPersonTo.getName(), targetPersonTo.getName());
   }
 
+  @Test
+  public void shouldReturnNull_whenTargetSupplierIsNull() {
+    TeacherPersonTo teacherPersonTo = prepareTeacher();
+
+    final Supplier<TargetPersonTo> supplier = null;
+    TargetPersonTo targetPersonTo = MapByFieldNameUtil.map(teacherPersonTo, supplier);
+
+    assertNull(targetPersonTo);
+  }
+
 
   private TeacherPersonTo prepareTeacher() {
     TeacherPersonTo teacher = new TeacherPersonTo();
