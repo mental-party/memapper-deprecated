@@ -41,7 +41,7 @@ public class CommonMapUtil {
    */
   public static List<Field> getAllFields(Class<?> type, boolean includeSuperFields) {
     List<Field> fields = new ArrayList<>();
-    if (type.getSuperclass() != null) {
+    if (includeSuperFields && type.getSuperclass() != null) {
       List<Field> fieldsOfSuper = getAllFields(type.getSuperclass());
       fields.addAll(fieldsOfSuper);
     }
