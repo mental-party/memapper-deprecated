@@ -19,4 +19,12 @@ public class StringUtilTest {
 
     assertEquals(expectedValue, capitalizedString);
   }
+
+  @Test
+  public void generateRandomString_withCorrectLength() {
+    final int length = 20;
+    String randomString = StringUtil.generateRandomString(length);
+
+    assertEquals(length,randomString.length());
+  }
 }
