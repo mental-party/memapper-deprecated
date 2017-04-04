@@ -6,11 +6,12 @@ A Simple Generic Java Bean Object Mapper
 MeMapper is developed for a handy usage. It is as simple as this:
 
 * Example:
-> Target target = MeMapper.getMapperFrom(source).mapTo(Target.class); //requires a public no-args constructor
+> Optional&lt;Target&gt; target = MeMapper.getMapperFrom(source).mapTo(Target.class); //requires a public no-args constructor
+
 
 * Mapping with Lists:
 
-> List<Target> targets = MeMapper.getMapperFromList(sources).mapToList(Target.class);
+> Optional&lt;List&lt;Target&gt;&gt; targets = MeMapper.getMapperFromList(sources).mapToList(Target.class);
 
 ###Important points
 * Source and target classes must fit with Java Bean specs.
@@ -112,7 +113,7 @@ Mapping:
 >     source.setTitle("title");
 >     source.setList(Arrays.asList("1","2"));
 >      
->     Target target = MeMapper.getMapperFrom(source).mapTo(Target.class);
+>     Optional<Target> target = MeMapper.getMapperFrom(source).mapTo(Target.class);
 >     assert target.getId() == 1; //true
 >     assert target.getTitle() == "title"; //true
 >     assert target.getList() == null; //true
