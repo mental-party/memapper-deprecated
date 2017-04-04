@@ -118,7 +118,7 @@ Mapping:
 >     assert target.getList() == null; //true
 >     assert target.getRatio() == null; //true
 
-Instead of 
+If Source class implemenets Mappable interface; instead of 
 
 `MeMapper.getMapperFrom(source).mapTo(Target.class);`
  
