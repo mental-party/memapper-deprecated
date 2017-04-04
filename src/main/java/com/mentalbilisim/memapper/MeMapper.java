@@ -64,17 +64,6 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
     }
   }
 
-  /**
-   * Maps the given source SourceT objects
-   * to newly instantiated objects of the given TargetT.
-   *
-   * @param supplier Target object's Supplier.
-   * @return a List of TargetT objects, mapped from source objects.
-   */
-  @Override
-  public Iterable<TargetT> mapToList(Supplier<TargetT> supplier) {
-    return MapByFieldNameUtil.map(sources, supplier);
-  }
 
   /**
    * Maps the given source SourceT object
@@ -96,15 +85,4 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
   }
 
 
-  /**
-   * Maps the given source SourceT objects
-   * to newly instantiated objects of the given TargetT.
-   *
-   * @param supplier Target object's Supplier.
-   * @return a TargetT object, mapped from source object.
-   */
-  @Override
-  public TargetT mapTo(Supplier<TargetT> supplier) {
-    return MapByFieldNameUtil.map(source, supplier);
-  }
 }

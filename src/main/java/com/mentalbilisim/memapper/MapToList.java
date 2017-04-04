@@ -10,6 +10,4 @@ import java.util.function.Supplier;
  */
 public interface MapToList<TargetT> {
   Optional<Iterable<TargetT>> mapToList(Class<TargetT> targetType);
-
-  Iterable<TargetT> mapToList(Supplier<TargetT> supplier);
 }
