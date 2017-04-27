@@ -85,4 +85,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
   }
 
 
+  //  public MeMapper(Class<SourceT> sourceType, Class<TargetT> targetType) {
+  //
+  //  }
 }
