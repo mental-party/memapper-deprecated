@@ -1,6 +1,7 @@
 package com.mentalbilisim.memapper.util.mapping;
 
 import com.mentalbilisim.memapper.exception.TargetTypeInstantiationException;
+import com.mentalbilisim.memapper.util.PrimitiveUtil;
 import com.mentalbilisim.memapper.util.StringUtil;
 
 import java.lang.reflect.Field;
@@ -95,11 +96,20 @@ public class MapByFieldNameUtil {
       Stream<Field> targetFieldsStream = targetFields.stream();
       Optional<Field> targetFieldOptional = targetFieldsStream
           .filter(field ->
-              field.getName() == sourceFieldName
-                  && field.getType() == sourceFieldType)
+              field.getName() == sourceFieldName)
           .findFirst();
 
-      if (targetFieldOptional.isPresent()) {
+      if (!targetFieldOptional.isPresent()) {
+        continue;
+      }
+
+      Class<?> targetFieldType = targetFieldOptional.get().getType();
+
+      if (sourceFieldType.equals(targetFieldType)
+          || (sourceFieldType.isPrimitive()
+          && PrimitiveUtil.getWrapperClass(sourceFieldType).equals(targetFieldType))
+          || (targetFieldType.isPrimitive()
+          && PrimitiveUtil.getWrapperClass(targetFieldType).equals(sourceFieldType))) {
 
         String fieldNameCapitalized = StringUtil.capitalizeFirstLetter(sourceFieldName);
 
@@ -137,7 +147,7 @@ public class MapByFieldNameUtil {
         Method targetSetMethod;
         String targetSetMethodName = "set" + fieldNameCapitalized;
         try {
-          targetSetMethod = targetType.getMethod(targetSetMethodName, sourceFieldType);
+          targetSetMethod = targetType.getMethod(targetSetMethodName, targetFieldType);
         } catch (NoSuchMethodException e) {
           logger.debug("Field '" + targetType.getName() + " "
               + sourceFieldName + "' does not have a setter method.");
@@ -172,10 +182,11 @@ public class MapByFieldNameUtil {
   /**
    * Maps given source object's suitable fields
    * to a newly instantiated object of type targetType.
+   *
    * @param source    the object which's fields will be taken as map source.
    * @param supplier  the supplier which will be used to instantiate a target object.
-   * @param <SourceT>  source object' type.
-   * @param <TargetT>  target object's type.
+   * @param <SourceT> source object' type.
+   * @param <TargetT> target object's type.
    * @return an object of type targetType.
    */
   public static <SourceT, TargetT> TargetT map(SourceT source,
