@@ -97,4 +97,90 @@ public class PrimitiveUtilTest {
       assertEquals(Void.class, wrapperVoidClass);
     }
   }
+
+  public static class When_Wrapper {
+
+
+    @Test
+    public void class_boolean_returns_primitive_bool(){
+      Class<?> wrapperBooleanClass = Boolean.class;
+
+      Class<?> primitiveBooleanClass = PrimitiveUtil.getPrimitiveClass(wrapperBooleanClass);
+
+      assertEquals(boolean.class, primitiveBooleanClass);
+    }
+
+
+    @Test
+    public void class_byte_returns_primitive_byte(){
+      Class<?> wrapperByteClass = Byte.class;
+
+      Class<?> primitiveByteClass = PrimitiveUtil.getPrimitiveClass(wrapperByteClass);
+
+      assertEquals(byte.class, primitiveByteClass);
+    }
+
+    @Test
+    public void class_short_returns_primitive_short(){
+      Class<?> wrapperShortClass = Short.class;
+
+      Class<?> primitiveShortClass = PrimitiveUtil.getPrimitiveClass(wrapperShortClass);
+
+      assertEquals(short.class, primitiveShortClass);
+    }
+
+    @Test
+    public void class_charachter_returns_primitive_char(){
+      Class<?> wrapperCharachterClass = Character.class;
+
+      Class<?> primitiveCharClass = PrimitiveUtil.getPrimitiveClass(wrapperCharachterClass);
+
+      assertEquals(char.class, primitiveCharClass);
+    }
+
+    @Test
+    public void class_integer_returns_primitive_int(){
+      Class<?> wrapperIntegerClass = Integer.class;
+
+      Class<?> primitiveIntClass = PrimitiveUtil.getPrimitiveClass(wrapperIntegerClass);
+
+      assertEquals(int.class, primitiveIntClass);
+    }
+
+    @Test
+    public void class_long_returns_primitive_long(){
+      Class<?> wrapperLongClass = Long.class;
+
+      Class<?> primitiveLongClass = PrimitiveUtil.getPrimitiveClass(wrapperLongClass);
+
+      assertEquals(long.class, primitiveLongClass);
+    }
+
+    @Test
+    public void class_float_returns_primitive_float(){
+      Class<?> wrapperFloatClass = Float.class;
+
+      Class<?> primitiveFloatClass = PrimitiveUtil.getPrimitiveClass(wrapperFloatClass);
+
+      assertEquals(float.class, primitiveFloatClass);
+    }
+
+    @Test
+    public void class_double_returns_primitive_double(){
+      Class<?> wrapperDoubleClass = Double.class;
+
+      Class<?> primitiveDoubleClass = PrimitiveUtil.getPrimitiveClass(wrapperDoubleClass);
+
+      assertEquals(double.class, primitiveDoubleClass);
+    }
+
+    @Test
+    public void class_void_returns_primitive_void(){
+      Class<?> wrapperVoidClass = Void.class;
+
+      Class<?> primitiveVoidClass = PrimitiveUtil.getPrimitiveClass(wrapperVoidClass);
+
+      assertEquals(void.class, primitiveVoidClass);
+    }
+  }
 }
