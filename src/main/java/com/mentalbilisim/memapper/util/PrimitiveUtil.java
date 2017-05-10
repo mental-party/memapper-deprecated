@@ -1,6 +1,5 @@
 package com.mentalbilisim.memapper.util;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,8 +7,8 @@ import java.util.Map;
  * Created by erhan.karakaya on 5/8/2017.
  */
 public class PrimitiveUtil {
-  private final static Map<Class<?>, Class<?>> primitiveMap = new HashMap<>();
-  private final static Map<Class<?>, Class<?>> wrapperMap = new HashMap<>();
+  private static final Map<Class<?>, Class<?>> primitiveMap = new HashMap<>();
+  private static final Map<Class<?>, Class<?>> wrapperMap = new HashMap<>();
 
   static {
     primitiveMap.put(boolean.class, Boolean.class);
@@ -33,6 +32,11 @@ public class PrimitiveUtil {
     wrapperMap.put(Void.class, void.class);
   }
 
+  /**
+   * Gets the Wrapper class of the given primitive type.
+   * @param primitiveClass the primitive type argument.
+   * @return Wrapper class type.
+   */
   public static Class<?> getWrapperClass(Class<?> primitiveClass) {
     if (primitiveClass == null) {
       throw new IllegalArgumentException();
@@ -45,9 +49,14 @@ public class PrimitiveUtil {
     return primitiveClass;
   }
 
+  /**
+   * Gets the primitive class of the given Wrapper class, if there is.
+   * @param wrapperClass the wrapper type argument.
+   * @return primitive class type.
+   */
   public static Class<?> getPrimitiveClass(Class<?> wrapperClass) {
     if (wrapperClass == null) {
-      throw  new IllegalArgumentException();
+      throw new IllegalArgumentException();
     }
 
     if (wrapperClass.isPrimitive()) {

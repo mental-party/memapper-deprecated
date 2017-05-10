@@ -1,10 +1,10 @@
 package com.mentalbilisim.memapper.util;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by erhan.karakaya on 5/10/2017.
@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
 @RunWith(Enclosed.class)
 public class PrimitiveUtilTest {
 
-  public static class When_Primitive {
+  public static class WhenPrimitive {
 
 
     @Test
-    public void primitive_boolean_returns_class_bool(){
+    public void primitive_boolean_returns_class_bool() {
       Class<?> primitiveBooleanClass = boolean.class;
 
       Class<?> wrapperBooleanClass = PrimitiveUtil.getWrapperClass(primitiveBooleanClass);
@@ -26,7 +26,7 @@ public class PrimitiveUtilTest {
 
 
     @Test
-    public void primitive_byte_returns_class_byte(){
+    public void primitive_byte_returns_class_byte() {
       Class<?> primitiveByteClass = byte.class;
 
       Class<?> wrapperByteClass = PrimitiveUtil.getWrapperClass(primitiveByteClass);
@@ -35,7 +35,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void primitive_short_returns_class_short(){
+    public void primitive_short_returns_class_short() {
       Class<?> primitiveShortClass = short.class;
 
       Class<?> wrapperShortClass = PrimitiveUtil.getWrapperClass(primitiveShortClass);
@@ -44,7 +44,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void primitive_char_returns_class_charachter(){
+    public void primitive_char_returns_class_charachter() {
       Class<?> primitiveCharClass = char.class;
 
       Class<?> wrapperCharachterClass = PrimitiveUtil.getWrapperClass(primitiveCharClass);
@@ -53,7 +53,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void primitive_int_returns_class_integer(){
+    public void primitive_int_returns_class_integer() {
       Class<?> primitiveIntClass = int.class;
 
       Class<?> wrapperIntegerClass = PrimitiveUtil.getWrapperClass(primitiveIntClass);
@@ -62,7 +62,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void primitive_long_returns_class_long(){
+    public void primitive_long_returns_class_long() {
       Class<?> primitiveLongClass = long.class;
 
       Class<?> wrapperLongClass = PrimitiveUtil.getWrapperClass(primitiveLongClass);
@@ -71,7 +71,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void primitive_float_returns_class_float(){
+    public void primitive_float_returns_class_float() {
       Class<?> primitiveFloatClass = float.class;
 
       Class<?> wrapperFloatClass = PrimitiveUtil.getWrapperClass(primitiveFloatClass);
@@ -80,7 +80,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void primitive_double_returns_class_double(){
+    public void primitive_double_returns_class_double() {
       Class<?> primitiveDoubleClass = double.class;
 
       Class<?> wrapperDoubleClass = PrimitiveUtil.getWrapperClass(primitiveDoubleClass);
@@ -89,7 +89,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void primitive_void_returns_class_void(){
+    public void primitive_void_returns_class_void() {
       Class<?> primitiveVoidClass = void.class;
 
       Class<?> wrapperVoidClass = PrimitiveUtil.getWrapperClass(primitiveVoidClass);
@@ -98,11 +98,11 @@ public class PrimitiveUtilTest {
     }
   }
 
-  public static class When_Wrapper {
+  public static class WhenWrapper {
 
 
     @Test
-    public void class_boolean_returns_primitive_bool(){
+    public void class_boolean_returns_primitive_bool() {
       Class<?> wrapperBooleanClass = Boolean.class;
 
       Class<?> primitiveBooleanClass = PrimitiveUtil.getPrimitiveClass(wrapperBooleanClass);
@@ -112,7 +112,7 @@ public class PrimitiveUtilTest {
 
 
     @Test
-    public void class_byte_returns_primitive_byte(){
+    public void class_byte_returns_primitive_byte() {
       Class<?> wrapperByteClass = Byte.class;
 
       Class<?> primitiveByteClass = PrimitiveUtil.getPrimitiveClass(wrapperByteClass);
@@ -121,7 +121,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void class_short_returns_primitive_short(){
+    public void class_short_returns_primitive_short() {
       Class<?> wrapperShortClass = Short.class;
 
       Class<?> primitiveShortClass = PrimitiveUtil.getPrimitiveClass(wrapperShortClass);
@@ -130,7 +130,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void class_charachter_returns_primitive_char(){
+    public void class_charachter_returns_primitive_char() {
       Class<?> wrapperCharachterClass = Character.class;
 
       Class<?> primitiveCharClass = PrimitiveUtil.getPrimitiveClass(wrapperCharachterClass);
@@ -139,7 +139,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void class_integer_returns_primitive_int(){
+    public void class_integer_returns_primitive_int() {
       Class<?> wrapperIntegerClass = Integer.class;
 
       Class<?> primitiveIntClass = PrimitiveUtil.getPrimitiveClass(wrapperIntegerClass);
@@ -148,7 +148,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void class_long_returns_primitive_long(){
+    public void class_long_returns_primitive_long() {
       Class<?> wrapperLongClass = Long.class;
 
       Class<?> primitiveLongClass = PrimitiveUtil.getPrimitiveClass(wrapperLongClass);
@@ -157,7 +157,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void class_float_returns_primitive_float(){
+    public void class_float_returns_primitive_float() {
       Class<?> wrapperFloatClass = Float.class;
 
       Class<?> primitiveFloatClass = PrimitiveUtil.getPrimitiveClass(wrapperFloatClass);
@@ -166,7 +166,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void class_double_returns_primitive_double(){
+    public void class_double_returns_primitive_double() {
       Class<?> wrapperDoubleClass = Double.class;
 
       Class<?> primitiveDoubleClass = PrimitiveUtil.getPrimitiveClass(wrapperDoubleClass);
@@ -175,7 +175,7 @@ public class PrimitiveUtilTest {
     }
 
     @Test
-    public void class_void_returns_primitive_void(){
+    public void class_void_returns_primitive_void() {
       Class<?> wrapperVoidClass = Void.class;
 
       Class<?> primitiveVoidClass = PrimitiveUtil.getPrimitiveClass(wrapperVoidClass);
