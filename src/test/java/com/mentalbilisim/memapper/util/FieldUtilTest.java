@@ -1,19 +1,18 @@
 package com.mentalbilisim.memapper.util;
 
-import com.mentalbilisim.memapper.to.PersonTo;
+import static org.junit.Assert.*;
+
 import com.mentalbilisim.memapper.to.PrimitiveTypeTo;
 import com.mentalbilisim.memapper.to.WrapperTypeTo;
 import com.mentalbilisim.memapper.util.mapping.CommonMapUtil;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import sun.reflect.misc.*;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
 
 /**
  * Created by erhan.karakaya on 5/11/2017.
@@ -70,16 +69,12 @@ public class FieldUtilTest {
 
   public static class WhenFieldIsNull {
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentException() {
       Field nullField = null;
 
-      try{
-        boolean isBoolean = FieldUtil.isBoolean(nullField);
-        fail();
-      } catch (IllegalArgumentException ex) {
+      boolean isBoolean = FieldUtil.isBoolean(nullField);
 
-      }
     }
   }
 }
