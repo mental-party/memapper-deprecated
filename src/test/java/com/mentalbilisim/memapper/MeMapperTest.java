@@ -2,6 +2,7 @@ package com.mentalbilisim.memapper;
 
 import static org.junit.Assert.*;
 
+import com.mentalbilisim.memapper.to.BooleanTypesTo;
 import com.mentalbilisim.memapper.to.EnumGender;
 import com.mentalbilisim.memapper.to.NameTo;
 import com.mentalbilisim.memapper.to.PrimitiveTypeTo;
@@ -152,14 +153,14 @@ public class MeMapperTest {
 
       assertTrue(wrapperTypeToOptional.isPresent());
       WrapperTypeTo wrapperTypeTo = wrapperTypeToOptional.get();
-      assertEquals((Integer)id, wrapperTypeTo.getId());
-      assertEquals((Short)sid, wrapperTypeTo.getSid());
-      assertEquals((Long)lid, wrapperTypeTo.getLid());
-      assertEquals((Float)fid, wrapperTypeTo.getFid());
-      assertEquals((Double)did, wrapperTypeTo.getDid());
-      assertEquals((Character)cid, wrapperTypeTo.getCid());
-      assertEquals((Boolean)bid, wrapperTypeTo.getBid());
-      assertEquals((Byte)byid, wrapperTypeTo.getByid());
+      assertEquals((Integer) id, wrapperTypeTo.getId());
+      assertEquals((Short) sid, wrapperTypeTo.getSid());
+      assertEquals((Long) lid, wrapperTypeTo.getLid());
+      assertEquals((Float) fid, wrapperTypeTo.getFid());
+      assertEquals((Double) did, wrapperTypeTo.getDid());
+      assertEquals((Character) cid, wrapperTypeTo.getCid());
+      assertEquals((Boolean) bid, wrapperTypeTo.getBid());
+      assertEquals((Byte) byid, wrapperTypeTo.getByid());
     }
 
     @Test
@@ -188,22 +189,71 @@ public class MeMapperTest {
 
       assertTrue(primitiveTypeToOptional.isPresent());
       PrimitiveTypeTo primitiveTypeTo = primitiveTypeToOptional.get();
-      assertEquals((int)id, primitiveTypeTo.getId());
-      assertEquals((short)sid, primitiveTypeTo.getSid());
-      assertEquals((long)lid, primitiveTypeTo.getLid());
-      assertEquals((float)fid, primitiveTypeTo.getFid(), 0);
-      assertEquals((double)did, primitiveTypeTo.getDid(), 0);
-      assertEquals((char)cid, primitiveTypeTo.getCid());
-      assertEquals((boolean)bid, primitiveTypeTo.getBid());
-      assertEquals((byte)byid, primitiveTypeTo.getByid());
+      assertEquals((int) id, primitiveTypeTo.getId());
+      assertEquals((short) sid, primitiveTypeTo.getSid());
+      assertEquals((long) lid, primitiveTypeTo.getLid());
+      assertEquals((float) fid, primitiveTypeTo.getFid(), 0);
+      assertEquals((double) did, primitiveTypeTo.getDid(), 0);
+      assertEquals((char) cid, primitiveTypeTo.getCid());
+      assertEquals((boolean) bid, primitiveTypeTo.getBid());
+      assertEquals((byte) byid, primitiveTypeTo.getByid());
     }
   }
 
+  public static class ConversionOfBooleanField {
 
+    @Test
+    public void shouldMap_whenGetterNameBeginsWithIsAndPrimitive() {
+      final boolean value = true;
 
+      BooleanTypesTo booleanTypesTo = new BooleanTypesTo();
+      booleanTypesTo.setNameBeginsWithIsAndPrimitive(value);
 
+      Optional<BooleanTypesTo> mappedBooleanTypesTo = MeMapper.getMapperFrom(booleanTypesTo)
+          .mapTo(BooleanTypesTo.class);
 
+      assertEquals(value, mappedBooleanTypesTo.get().isNameBeginsWithIsAndPrimitive());
+    }
 
+    @Test
+    public void shouldMap_whenGetterNameBeginsWithIsAndWrapper() {
+      final Boolean value = true;
+
+      BooleanTypesTo booleanTypesTo = new BooleanTypesTo();
+      booleanTypesTo.setNameBeginsWithIsAndWrapper(value);
+
+      Optional<BooleanTypesTo> mappedBooleanTypesTo = MeMapper.getMapperFrom(booleanTypesTo)
+          .mapTo(BooleanTypesTo.class);
+
+      assertEquals(value, mappedBooleanTypesTo.get().isNameBeginsWithIsAndWrapper());
+    }
+
+    @Test
+    public void shouldMap_whenGetterNameBeginsWithGetAndPrimitive() {
+      final boolean value = true;
+
+      BooleanTypesTo booleanTypesTo = new BooleanTypesTo();
+      booleanTypesTo.setNameBeginsWithGetAndPrimitive(value);
+
+      Optional<BooleanTypesTo> mappedBooleanTypesTo = MeMapper.getMapperFrom(booleanTypesTo)
+          .mapTo(BooleanTypesTo.class);
+
+      assertEquals(value, mappedBooleanTypesTo.get().getNameBeginsWithGetAndPrimitive());
+    }
+
+    @Test
+    public void shouldMap_whenGetterNameBeginsWithGetAndWrapper() {
+      final Boolean value = true;
+
+      BooleanTypesTo booleanTypesTo = new BooleanTypesTo();
+      booleanTypesTo.setNameBeginsWithGetAndWrapper(value);
+
+      Optional<BooleanTypesTo> mappedBooleanTypesTo = MeMapper.getMapperFrom(booleanTypesTo)
+          .mapTo(BooleanTypesTo.class);
+
+      assertEquals(value, mappedBooleanTypesTo.get().getNameBeginsWithGetAndWrapper());
+    }
+  }
 
 
 }
