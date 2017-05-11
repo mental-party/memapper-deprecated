@@ -1,6 +1,7 @@
 package com.mentalbilisim.memapper.util.mapping;
 
 import com.mentalbilisim.memapper.exception.TargetTypeInstantiationException;
+import com.mentalbilisim.memapper.util.FieldUtil;
 import com.mentalbilisim.memapper.util.PrimitiveUtil;
 import com.mentalbilisim.memapper.util.StringUtil;
 
@@ -114,14 +115,29 @@ public class MapByFieldNameUtil {
         String fieldNameCapitalized = StringUtil.capitalizeFirstLetter(sourceFieldName);
 
 
-        Method sourceGetMethod;
-        String sourceGetMethodName = "get" + fieldNameCapitalized;
-        try {
-          sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
-        } catch (NoSuchMethodException e) {
-          logger.debug("Field '" + sourceType.getName() + " "
-              + sourceFieldName + "' does not have a getter method.");
-          continue;
+        Method sourceGetMethod = null;
+        String sourceGetMethodName = "";
+        if (FieldUtil.isBoolean(sourceField)) {
+          sourceGetMethodName = "is" + fieldNameCapitalized;
+          try {
+            sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
+          } catch (NoSuchMethodException e) {
+            logger.debug("Field '" + sourceType.getName() + " "
+                + sourceFieldName + "' does not have a getter method named " + sourceGetMethodName
+                + ".");
+          }
+        }
+
+        if (sourceGetMethod == null) {
+          sourceGetMethodName = "get" + fieldNameCapitalized;
+          try {
+            sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
+          } catch (NoSuchMethodException e) {
+            logger.debug("Field '" + sourceType.getName() + " "
+                + sourceFieldName + "' does not have a getter method."
+                + " Field is ignored.");
+            continue;
+          }
         }
 
         Object sourceFieldVal;
