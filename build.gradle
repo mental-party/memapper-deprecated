@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'pmd'
 apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
 
 checkstyle {
     toolVersion = '7.6'
@@ -14,4 +15,12 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
 
     testCompile 'junit:junit:4.12'
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+        html.stylesheet resources.text.fromFile('config/findbugs/color.xsl')
+    }
 }
