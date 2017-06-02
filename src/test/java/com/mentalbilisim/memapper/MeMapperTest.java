@@ -32,7 +32,7 @@ public class MeMapperTest {
     @Test
     public void shouldThrowException_whenCallingConstructorPublicly() {
       try {
-        MeMapper mapper = MeMapper.class.newInstance();
+        MeMapper.class.newInstance();
         fail();
       } catch (InstantiationException e) {
         return;
@@ -195,7 +195,7 @@ public class MeMapperTest {
       assertEquals((float) fid, primitiveTypeTo.getFid(), 0);
       assertEquals((double) did, primitiveTypeTo.getDid(), 0);
       assertEquals((char) cid, primitiveTypeTo.getCid());
-      assertEquals((boolean) bid, primitiveTypeTo.getBid());
+      assertEquals(bid, primitiveTypeTo.getBid());
       assertEquals((byte) byid, primitiveTypeTo.getByid());
     }
   }

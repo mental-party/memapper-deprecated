@@ -52,8 +52,7 @@ public class MapByFieldNameUtilTest {
   public void shouldThrowException_whenTargetClassIsGivenAndTargetHasNotEmptyConstructor()
       throws TargetTypeInstantiationException {
     TeacherPersonTo teacherPersonTo = prepareTeacher();
-    TargetPersonNoEmptyConstructorTo targetPersonTo =
-        MapByFieldNameUtil.map(teacherPersonTo, TargetPersonNoEmptyConstructorTo.class);
+    MapByFieldNameUtil.map(teacherPersonTo, TargetPersonNoEmptyConstructorTo.class);
   }
 
   @Test

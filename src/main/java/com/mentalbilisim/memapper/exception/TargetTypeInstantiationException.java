@@ -5,7 +5,7 @@ package com.mentalbilisim.memapper.exception;
  */
 public class TargetTypeInstantiationException extends Exception {
 
-  private String resultTypeInstantiationExceptionMessage = "Can not "
+  private static final String resultTypeInstantiationExceptionMessage = "Can not "
       + "instantiate a new object of given result type: "
       + "%s. The result type must have a public no-args constructor.";
 
@@ -15,9 +15,8 @@ public class TargetTypeInstantiationException extends Exception {
    * @param resultType The type which couldn't be instantiated.
    */
   public TargetTypeInstantiationException(Class<?> resultType) {
-    String message = String.format(resultTypeInstantiationExceptionMessage,
-        resultType.getTypeName());
-    new TargetTypeInstantiationException(message);
+    super(String.format(resultTypeInstantiationExceptionMessage,
+        resultType.getTypeName()));
   }
 
   /**
@@ -26,9 +25,8 @@ public class TargetTypeInstantiationException extends Exception {
    * @param cause Throwable object, if any, which has caused the exception.
    */
   public TargetTypeInstantiationException(Class<?> resultType, Throwable cause) {
-    String message = String.format(resultTypeInstantiationExceptionMessage,
-        resultType.getTypeName());
-    new TargetTypeInstantiationException(message, cause);
+    super(String.format(resultTypeInstantiationExceptionMessage,
+        resultType.getTypeName()), cause);
   }
 
   public TargetTypeInstantiationException(String message) {

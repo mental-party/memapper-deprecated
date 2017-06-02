@@ -226,7 +226,7 @@ public class MapByFieldNameUtil {
       throws TargetTypeInstantiationException {
 
     try {
-      TargetT targetT = targetType.newInstance();
+      targetType.newInstance();
     } catch (Exception e) {
       TargetTypeInstantiationException exception =
           new TargetTypeInstantiationException(targetType, e);

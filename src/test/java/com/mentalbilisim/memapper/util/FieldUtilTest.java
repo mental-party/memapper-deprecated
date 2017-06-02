@@ -73,7 +73,7 @@ public class FieldUtilTest {
     public void shouldThrowIllegalArgumentException() {
       Field nullField = null;
 
-      boolean isBoolean = FieldUtil.isBoolean(nullField);
+      FieldUtil.isBoolean(nullField);
 
     }
   }
