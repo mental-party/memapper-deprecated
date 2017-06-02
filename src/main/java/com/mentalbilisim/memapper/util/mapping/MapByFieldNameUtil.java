@@ -97,7 +97,7 @@ public class MapByFieldNameUtil {
       Stream<Field> targetFieldsStream = targetFields.stream();
       Optional<Field> targetFieldOptional = targetFieldsStream
           .filter(field ->
-              field.getName() == sourceFieldName)
+              field.getName().equals(sourceFieldName))
           .findFirst();
 
       if (!targetFieldOptional.isPresent()) {
