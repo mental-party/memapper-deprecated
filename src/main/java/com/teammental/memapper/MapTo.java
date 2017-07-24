@@ -8,5 +8,16 @@ import java.util.Optional;
  *         supply more readible code.
  */
 public interface MapTo<TargetT> {
+
+  /**
+   * Maps the given source SourceT object
+   * to a newly instantiated object of the given TargetType.
+   *
+   * @param targetType Target object's class.
+   *                   Target type must have a public no-arg
+   *                   constructor. Otherwise a TargetTypeInstantiationException
+   *                   will be thrown.
+   * @return Optional&lt;TargetT&gt;.
+   */
   Optional<TargetT> mapTo(Class<TargetT> targetType);
 }

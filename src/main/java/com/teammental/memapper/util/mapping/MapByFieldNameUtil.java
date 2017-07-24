@@ -51,9 +51,9 @@ public class MapByFieldNameUtil {
 
     try {
       target = (TargetT) targetType.newInstance();
-    } catch (Exception e) {
+    } catch (Exception ex) {
       TargetTypeInstantiationException exception =
-          new TargetTypeInstantiationException(targetType, e);
+          new TargetTypeInstantiationException(targetType, ex);
       logger.debug(exception.getMessage());
       throw exception;
     }
@@ -121,7 +121,7 @@ public class MapByFieldNameUtil {
           sourceGetMethodName = "is" + fieldNameCapitalized;
           try {
             sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
-          } catch (NoSuchMethodException e) {
+          } catch (NoSuchMethodException ex) {
             logger.debug("Field '" + sourceType.getName() + " "
                 + sourceFieldName + "' does not have a getter method named " + sourceGetMethodName
                 + ".");
@@ -132,7 +132,7 @@ public class MapByFieldNameUtil {
           sourceGetMethodName = "get" + fieldNameCapitalized;
           try {
             sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
-          } catch (NoSuchMethodException e) {
+          } catch (NoSuchMethodException ex) {
             logger.debug("Field '" + sourceType.getName() + " "
                 + sourceFieldName + "' does not have a getter method."
                 + " Field is ignored.");
@@ -143,17 +143,17 @@ public class MapByFieldNameUtil {
         Object sourceFieldVal;
         try {
           sourceFieldVal = sourceGetMethod.invoke(source, null);
-        } catch (InvocationTargetException e) {
+        } catch (InvocationTargetException ex) {
           logger.debug("Invokation of  '" + sourceType.getName()
               + " " + sourceGetMethodName + "' failed. "
               + "Probably it requires at least 1 arg.");
           continue;
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException ex) {
           logger.debug("Invokation of  '"
               + sourceType.getName() + " " + sourceGetMethodName + "' failed. "
               + "It has restricted access.");
           continue;
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ex) {
           logger.debug("Invokation of  '"
               + sourceType.getName() + " " + sourceGetMethodName + "' failed. "
               + "Illegal argument.");
@@ -164,7 +164,7 @@ public class MapByFieldNameUtil {
         String targetSetMethodName = "set" + fieldNameCapitalized;
         try {
           targetSetMethod = targetType.getMethod(targetSetMethodName, targetFieldType);
-        } catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException ex) {
           logger.debug("Field '" + targetType.getName() + " "
               + sourceFieldName + "' does not have a setter method.");
           continue;
@@ -173,17 +173,17 @@ public class MapByFieldNameUtil {
 
         try {
           targetSetMethod.invoke(target, sourceFieldVal);
-        } catch (InvocationTargetException e) {
+        } catch (InvocationTargetException ex) {
           logger.debug("Invokation of  '" + targetType.getName()
               + " " + targetSetMethodName + "' failed. "
               + "Probably it requires at least 1 arg.");
           continue;
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException ex) {
           logger.debug("Invokation of  '" + targetType.getName()
               + " " + targetSetMethodName + "' failed. "
               + "It has restricted access.");
           continue;
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ex) {
           logger.debug("Invokation of  '" + targetType.getName()
               + " " + targetSetMethodName + "' failed. "
               + "Illegal argument.");
@@ -227,9 +227,9 @@ public class MapByFieldNameUtil {
 
     try {
       targetType.newInstance();
-    } catch (Exception e) {
+    } catch (Exception ex) {
       TargetTypeInstantiationException exception =
-          new TargetTypeInstantiationException(targetType, e);
+          new TargetTypeInstantiationException(targetType, ex);
       logger.debug(exception.getMessage());
       throw exception;
     }
@@ -237,7 +237,7 @@ public class MapByFieldNameUtil {
     return map(sources, () -> {
       try {
         return targetType.newInstance();
-      } catch (Exception e) {
+      } catch (Exception ex) {
         return null;
       }
     });

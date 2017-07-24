@@ -1,6 +1,8 @@
 package com.teammental.memapper.util.mapping;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import com.teammental.memapper.exception.TargetTypeInstantiationException;
 import com.teammental.memapper.to.EnumGender;

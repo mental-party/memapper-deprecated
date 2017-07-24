@@ -71,6 +71,7 @@ public class CommonMapUtil {
    * the fields derived from the super class is extracted too.
    *
    * @param source The object which's fields are wanted to be extracted.
+   * @param <T> Generic type of source object.
    * @return a Map object which contains extracted fields names and values from the given object
    * @throws IllegalAccessException throws this when can't get one of the field's value of source.
    */
@@ -85,6 +86,7 @@ public class CommonMapUtil {
    * @param source The object which's fields are wanted to be extracted.
    * @param includeSuperFields if false, fields of superclass will not be included;
    *                           if true, fields of superclass will be included.
+   * @param <T> Generic type of source object.
    * @return a Map object which contains extracted fields names and values from the given object
    * @throws IllegalAccessException throws this when can't get one of the field's value of source.
    */

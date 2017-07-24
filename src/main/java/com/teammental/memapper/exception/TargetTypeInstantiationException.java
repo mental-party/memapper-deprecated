@@ -29,10 +29,19 @@ public class TargetTypeInstantiationException extends Exception {
         resultType.getTypeName()), cause);
   }
 
+  /**
+   * Constructor, used whit custom exception message.
+   * @param message custom exception message
+   */
   public TargetTypeInstantiationException(String message) {
     super(message);
   }
 
+  /**
+   * Constructor, used whit custom exception message and a Throwable cause object.
+   * @param message custom exception message
+   * @param cause the exception which caused this
+   */
   public TargetTypeInstantiationException(String message, Throwable cause) {
     super(message, cause);
   }

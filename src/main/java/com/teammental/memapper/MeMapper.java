@@ -4,6 +4,9 @@ import com.teammental.memapper.util.mapping.MapByFieldNameUtil;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Mapper is used for mapping from a SourceT source object
  * to a TargetT object in an easy and readible way.
@@ -11,6 +14,8 @@ import java.util.Optional;
 public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<TargetT> {
   private SourceT source;
   private Iterable<SourceT> sources;
+
+  private static final Logger logger = LoggerFactory.getLogger(MeMapper.class);
 
   private MeMapper(SourceT source) {
     this.source = source;
@@ -26,6 +31,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
    *
    * @param source SourceT object which will be used
    *               as source when mapping.
+   * @param <SourceT> generic type of source object
    * @return a new Mapper instance.
    */
   public static <SourceT> MapTo getMapperFrom(SourceT source) {
@@ -37,6 +43,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
    *
    * @param sources List&lt;SourceT&gt; object which will be used
    *                as source when mapping.
+   * @param <SourceT> generic type of source object
    * @return a new Mapper instance.
    */
   public static <SourceT> MapToList getMapperFromList(Iterable<SourceT> sources) {
@@ -58,7 +65,8 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
   public Optional<Iterable<TargetT>> mapToList(Class<TargetT> targetType) {
     try {
       return Optional.ofNullable(MapByFieldNameUtil.map(sources, targetType));
-    } catch (Exception e) {
+    } catch (Exception exception) {
+      logger.debug(exception.getLocalizedMessage());
       return Optional.empty();
     }
   }
@@ -78,7 +86,8 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
   public Optional<TargetT> mapTo(Class<TargetT> targetType) {
     try {
       return Optional.ofNullable(MapByFieldNameUtil.map(source, targetType));
-    } catch (Exception e) {
+    } catch (Exception exception) {
+      logger.debug(exception.getLocalizedMessage());
       return Optional.empty();
     }
   }

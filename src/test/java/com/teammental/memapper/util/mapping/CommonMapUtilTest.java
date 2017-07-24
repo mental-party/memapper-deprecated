@@ -1,6 +1,6 @@
 package com.teammental.memapper.util.mapping;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import com.teammental.memapper.to.EnumGender;
 import com.teammental.memapper.to.NameTo;
