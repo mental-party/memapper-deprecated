@@ -59,7 +59,7 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
    *                   Target type must have a public no-arg
    *                   constructor. Otherwise a TargetTypeInstantiationException
    *                   will be thrown.
-   * @return Optional&lt;Iterable&ltTargetT&gt;&gt;
+   * @return Optional Iterable TargetT
    */
   @Override
   public Optional<Iterable<TargetT>> mapToList(Class<TargetT> targetType) {
