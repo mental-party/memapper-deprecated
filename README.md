@@ -126,3 +126,17 @@ If Source class implements `Mappable` interface; instead of
  you can use `source.mapTo(Target.class);`.
 
 
+
+#For Developer
+Build and generate publication.
+
+<code>
+ ./gradlew clean build generatePomFileForBintrayPublicationPublication -DbambooPublishNumber=0
+</code>
+
+
+### After publish to bintray
+
+<code>
+./gradlew -Pbintray-user=coskundeniz -Pbintray-key=**************** bintrayUpload -x clean
+</code>
