@@ -10,15 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 /**
  * author @er-han on 3/30/2017.
  */
 public class CommonMapUtil {
-  private static final Logger logger = LoggerFactory.getLogger(CommonMapUtil.class);
 
   /**
    * Gets all public, private, protected fields of the given type.
@@ -51,7 +46,7 @@ public class CommonMapUtil {
           Iterator<Field> iterator = fields.iterator();
           while (iterator.hasNext()) {
             Field tempField = iterator.next();
-            if (tempField.getName().equals(field.getName())) {
+            if (field.isSynthetic() || tempField.getName().equals(field.getName())) {
               iterator.remove();
               break;
             }

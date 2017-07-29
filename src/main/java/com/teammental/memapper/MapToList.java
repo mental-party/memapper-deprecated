@@ -1,7 +1,6 @@
 package com.teammental.memapper;
 
 import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * @author er-han on 30.03.2017
