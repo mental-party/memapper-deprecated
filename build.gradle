@@ -39,8 +39,8 @@ bintray {
         desc = 'Mental Soft Generic Mapper Package'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/mental-party/memapper.git'
-        userOrg = 'mental-party'
-        labels = ['builder', 'java', 'generic']
+        userOrg = 'mental-soft'
+        labels = ['mapper', 'java', 'generic']
         publicDownloadNumbers = true
         version {
             name = System.getProperty('bambooPublishNumber')
