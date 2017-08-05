@@ -1,5 +1,7 @@
 package com.teammental.memapper.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -13,7 +15,7 @@ public class StringUtil {
    * @return capitalized state of the given param.
    */
   public static String capitalizeFirstLetter(String str) {
-    if (str == null || str.length() == 0) {
+    if (isNullOrEmpty(str)) {
       return str;
     }
     StringBuilder stringBuilder = new StringBuilder();
@@ -27,6 +29,7 @@ public class StringUtil {
 
   /**
    * Generates random string.
+   *
    * @param length desired length of string.
    * @return randomly generated string.
    */
@@ -40,5 +43,44 @@ public class StringUtil {
     }
     String output = sb.toString();
     return output;
+  }
+
+  /**
+   * Checks if a String object is null or empty.
+   *
+   * @param str String object which will be checked
+   * @return true if str is empty or null, false if not
+   */
+  public static boolean isNullOrEmpty(String str) {
+    return str == null || str.length() == 0;
+  }
+
+
+  /**
+   * Splits a String object by capital letters in it.
+   * @param str String object which will be splitted
+   * @return List of String
+   */
+  public static List<String> splitByCapitalLetters(String str) {
+    if (isNullOrEmpty(str)) {
+      return null;
+    }
+
+    char[] chars = str.toCharArray();
+    List<String> split = new ArrayList<>();
+
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(chars[0]);
+    for (int i = 1; i < chars.length; i++) {
+      char ch = chars[i];
+      if (Character.isUpperCase(ch)) {
+        split.add(stringBuilder.toString());
+        stringBuilder = new StringBuilder();
+      }
+      stringBuilder.append(ch);
+    }
+    split.add(stringBuilder.toString());
+
+    return split;
   }
 }
