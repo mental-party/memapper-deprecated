@@ -62,6 +62,18 @@ public class StringUtil {
    * @return List of String
    */
   public static List<String> splitByCapitalLetters(String str) {
+
+    return splitByCapitalLetters(str, false);
+  }
+
+  /**
+   * Splits a String object by capital letters in it.
+   * @param str String object which will be splitted
+   * @param onlyFromFirstOccurance if true, str will be splitted into two sub-strings
+   *                               by first capital character
+   * @return List of String
+   */
+  public static List<String> splitByCapitalLetters(String str, boolean onlyFromFirstOccurance) {
     if (isNullOrEmpty(str)) {
       return null;
     }
@@ -76,6 +88,12 @@ public class StringUtil {
       if (Character.isUpperCase(ch)) {
         split.add(stringBuilder.toString());
         stringBuilder = new StringBuilder();
+        if (onlyFromFirstOccurance) {
+          for (int j = i; j < chars.length; j++) {
+            stringBuilder.append(chars[j]);
+          }
+          break;
+        }
       }
       stringBuilder.append(ch);
     }

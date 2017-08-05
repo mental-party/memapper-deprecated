@@ -111,12 +111,23 @@ public class StringUtilTest {
     }
 
     @Test
-    public void shouldReturnCorrectList() {
+    public void shouldSplitByAllCapitals() {
       final String str = "abcDeFGjkMNo";
       final List<String> expectedResult = new ArrayList<>(
           Arrays.asList("abc", "De", "F", "Gjk", "M", "No"));
 
       List<String> actualResult = StringUtil.splitByCapitalLetters(str);
+
+      assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void shouldSplitByFirstCapital() {
+      final String str = "abcDeFGjkMNo";
+      final List<String> expectedResult = new ArrayList<>(
+          Arrays.asList("abc", "DeFGjkMNo"));
+
+      List<String> actualResult = StringUtil.splitByCapitalLetters(str, true);
 
       assertEquals(expectedResult, actualResult);
     }

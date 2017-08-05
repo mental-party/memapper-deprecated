@@ -100,95 +100,99 @@ public class MapByFieldNameUtil {
               field.getName().equals(sourceFieldName))
           .findFirst();
 
-      if (!targetFieldOptional.isPresent()) {
-        continue;
-      }
+      if (targetFieldOptional.isPresent()) {
 
-      Class<?> targetFieldType = targetFieldOptional.get().getType();
+        Class<?> targetFieldType = targetFieldOptional.get().getType();
 
-      if (sourceFieldType.equals(targetFieldType)
-          || (sourceFieldType.isPrimitive()
-          && PrimitiveUtil.getWrapperClass(sourceFieldType).equals(targetFieldType))
-          || (targetFieldType.isPrimitive()
-          && PrimitiveUtil.getWrapperClass(targetFieldType).equals(sourceFieldType))) {
+        if (sourceFieldType.equals(targetFieldType)
+            || (sourceFieldType.isPrimitive()
+            && PrimitiveUtil.getWrapperClass(sourceFieldType).equals(targetFieldType))
+            || (targetFieldType.isPrimitive()
+            && PrimitiveUtil.getWrapperClass(targetFieldType).equals(sourceFieldType))) {
 
-        String fieldNameCapitalized = StringUtil.capitalizeFirstLetter(sourceFieldName);
+          String fieldNameCapitalized = StringUtil.capitalizeFirstLetter(sourceFieldName);
 
 
-        Method sourceGetMethod = null;
-        String sourceGetMethodName = "";
-        if (FieldUtil.isBoolean(sourceField)) {
-          sourceGetMethodName = "is" + fieldNameCapitalized;
-          try {
-            sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
-          } catch (NoSuchMethodException ex) {
-            logger.debug("Field '" + sourceType.getName() + " "
-                + sourceFieldName + "' does not have a getter method named " + sourceGetMethodName
-                + ".");
+          Method sourceGetMethod = null;
+          String sourceGetMethodName = "";
+          if (FieldUtil.isBoolean(sourceField)) {
+            sourceGetMethodName = "is" + fieldNameCapitalized;
+            try {
+              sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
+            } catch (NoSuchMethodException ex) {
+              logger.debug("Field '" + sourceType.getName() + " "
+                  + sourceFieldName + "' does not have a getter method named " + sourceGetMethodName
+                  + ".");
+            }
           }
-        }
 
-        if (sourceGetMethod == null) {
-          sourceGetMethodName = "get" + fieldNameCapitalized;
+          if (sourceGetMethod == null) {
+            sourceGetMethodName = "get" + fieldNameCapitalized;
+            try {
+              sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
+            } catch (NoSuchMethodException ex) {
+              logger.debug("Field '" + sourceType.getName() + " "
+                  + sourceFieldName + "' does not have a getter method."
+                  + " Field is ignored.");
+              continue;
+            }
+          }
+
+          Object sourceFieldVal;
           try {
-            sourceGetMethod = sourceType.getMethod(sourceGetMethodName);
-          } catch (NoSuchMethodException ex) {
-            logger.debug("Field '" + sourceType.getName() + " "
-                + sourceFieldName + "' does not have a getter method."
-                + " Field is ignored.");
+            sourceFieldVal = sourceGetMethod.invoke(source, null);
+          } catch (InvocationTargetException ex) {
+            logger.debug("Invokation of  '" + sourceType.getName()
+                + " " + sourceGetMethodName + "' failed. "
+                + "Probably it requires at least 1 arg.");
+            continue;
+          } catch (IllegalAccessException ex) {
+            logger.debug("Invokation of  '"
+                + sourceType.getName() + " " + sourceGetMethodName + "' failed. "
+                + "It has restricted access.");
+            continue;
+          } catch (IllegalArgumentException ex) {
+            logger.debug("Invokation of  '"
+                + sourceType.getName() + " " + sourceGetMethodName + "' failed. "
+                + "Illegal argument.");
             continue;
           }
-        }
 
-        Object sourceFieldVal;
-        try {
-          sourceFieldVal = sourceGetMethod.invoke(source, null);
-        } catch (InvocationTargetException ex) {
-          logger.debug("Invokation of  '" + sourceType.getName()
-              + " " + sourceGetMethodName + "' failed. "
-              + "Probably it requires at least 1 arg.");
-          continue;
-        } catch (IllegalAccessException ex) {
-          logger.debug("Invokation of  '"
-              + sourceType.getName() + " " + sourceGetMethodName + "' failed. "
-              + "It has restricted access.");
-          continue;
-        } catch (IllegalArgumentException ex) {
-          logger.debug("Invokation of  '"
-              + sourceType.getName() + " " + sourceGetMethodName + "' failed. "
-              + "Illegal argument.");
-          continue;
-        }
-
-        Method targetSetMethod;
-        String targetSetMethodName = "set" + fieldNameCapitalized;
-        try {
-          targetSetMethod = targetType.getMethod(targetSetMethodName, targetFieldType);
-        } catch (NoSuchMethodException ex) {
-          logger.debug("Field '" + targetType.getName() + " "
-              + sourceFieldName + "' does not have a setter method.");
-          continue;
-        }
+          Method targetSetMethod;
+          String targetSetMethodName = "set" + fieldNameCapitalized;
+          try {
+            targetSetMethod = targetType.getMethod(targetSetMethodName, targetFieldType);
+          } catch (NoSuchMethodException ex) {
+            logger.debug("Field '" + targetType.getName() + " "
+                + sourceFieldName + "' does not have a setter method.");
+            continue;
+          }
 
 
-        try {
-          targetSetMethod.invoke(target, sourceFieldVal);
-        } catch (InvocationTargetException ex) {
-          logger.debug("Invokation of  '" + targetType.getName()
-              + " " + targetSetMethodName + "' failed. "
-              + "Probably it requires at least 1 arg.");
-          continue;
-        } catch (IllegalAccessException ex) {
-          logger.debug("Invokation of  '" + targetType.getName()
-              + " " + targetSetMethodName + "' failed. "
-              + "It has restricted access.");
-          continue;
-        } catch (IllegalArgumentException ex) {
-          logger.debug("Invokation of  '" + targetType.getName()
-              + " " + targetSetMethodName + "' failed. "
-              + "Illegal argument.");
-          continue;
+          try {
+            targetSetMethod.invoke(target, sourceFieldVal);
+          } catch (InvocationTargetException ex) {
+            logger.debug("Invokation of  '" + targetType.getName()
+                + " " + targetSetMethodName + "' failed. "
+                + "Probably it requires at least 1 arg.");
+            continue;
+          } catch (IllegalAccessException ex) {
+            logger.debug("Invokation of  '" + targetType.getName()
+                + " " + targetSetMethodName + "' failed. "
+                + "It has restricted access.");
+            continue;
+          } catch (IllegalArgumentException ex) {
+            logger.debug("Invokation of  '" + targetType.getName()
+                + " " + targetSetMethodName + "' failed. "
+                + "Illegal argument.");
+            continue;
+          }
+
         }
+      } else {
+
+
+
 
       }
     }
