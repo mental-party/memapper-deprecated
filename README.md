@@ -15,6 +15,7 @@ MeMapper is developed for a handy usage. It is as simple as this:
 
 ###Important points
 * Source and target classes must fit with Java Bean specs.
+    - **important:** do not name boolean fields starting with 'is'. (_private boolean_ _~~isActive~~_ | _active_)
 * MeMapper maps fields which have the same name and type in both source and target types.
 * Only those fields which have `public` getters will be used when mapping from source.
 * Only those fields which have `public` setters will be used when mapping to target.
