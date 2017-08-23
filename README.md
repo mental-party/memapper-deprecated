@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/mental-party/memapper.svg?branch=master)](https://travis-ci.org/mental-party/memapper)
+
+
 # MeMapper
 A Simple Generic Java Bean Object Mapper
 
