@@ -1,6 +1,7 @@
 package com.teammental.memapper.util.mapping;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
@@ -19,6 +20,7 @@ import java.util.function.Supplier;
 
 import com.teammental.memapper.to.assignable.AssignableFirstTo;
 import com.teammental.memapper.to.assignable.AssignableSecondTo;
+import com.teammental.memapper.to.assignable.AssignableThirdTo;
 import org.junit.Test;
 
 /**
@@ -166,6 +168,19 @@ public class MapByFieldNameUtilTest {
         .mapTo(AssignableFirstTo.class);
 
     assertEquals(expectedId, firstTo.get().getId());
+  }
+
+  @Test
+  public void shouldNotMapFromAssignableType_whenNotAvailable() {
+    final Integer expectedId = 55;
+
+    AssignableFirstTo firstTo = new AssignableFirstTo();
+    firstTo.setId(expectedId);
+
+    Optional<AssignableThirdTo> thirdTo = MeMapper.getMapperFrom(firstTo)
+        .mapTo(AssignableThirdTo.class);
+
+    assertNotEquals(expectedId.toString(), thirdTo.get().getId());
   }
 
 
