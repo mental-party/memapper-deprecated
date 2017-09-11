@@ -58,6 +58,7 @@ public class StringUtil {
 
   /**
    * Splits a String object by capital letters in it.
+   *
    * @param str String object which will be splitted
    * @return List of String
    */
@@ -68,7 +69,8 @@ public class StringUtil {
 
   /**
    * Splits a String object by capital letters in it.
-   * @param str String object which will be splitted
+   *
+   * @param str                    String object which will be splitted
    * @param onlyFromFirstOccurance if true, str will be splitted into two sub-strings
    *                               by first capital character
    * @return List of String

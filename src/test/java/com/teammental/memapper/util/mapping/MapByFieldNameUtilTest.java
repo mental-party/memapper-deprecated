@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
+import com.teammental.memapper.MeMapper;
 import com.teammental.memapper.exception.TargetTypeInstantiationException;
 import com.teammental.memapper.to.EnumGender;
 import com.teammental.memapper.to.NameTo;
@@ -13,8 +14,11 @@ import com.teammental.memapper.to.TeacherPersonTo;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
+import com.teammental.memapper.to.assignable.AssignableFirstTo;
+import com.teammental.memapper.to.assignable.AssignableSecondTo;
 import org.junit.Test;
 
 /**
@@ -136,6 +140,32 @@ public class MapByFieldNameUtilTest {
     TargetPersonTo targetPersonTo = MapByFieldNameUtil.map(teacherPersonTo, supplier);
 
     assertNull(targetPersonTo);
+  }
+
+  @Test
+  public void shouldMapFromAssignableType() {
+    final Integer expectedId = 55;
+
+    AssignableFirstTo firstTo = new AssignableFirstTo();
+    firstTo.setId(expectedId);
+
+    Optional<AssignableSecondTo> secondTo = MeMapper.getMapperFrom(firstTo)
+        .mapTo(AssignableSecondTo.class);
+
+    assertEquals(expectedId, secondTo.get().getId());
+  }
+
+  @Test
+  public void shouldMapToAssignableType() {
+    final Integer expectedId = 55;
+
+    AssignableSecondTo secondTo = new AssignableSecondTo();
+    secondTo.setId(expectedId);
+
+    Optional<AssignableFirstTo> firstTo = MeMapper.getMapperFrom(secondTo)
+        .mapTo(AssignableFirstTo.class);
+
+    assertEquals(expectedId, firstTo.get().getId());
   }
 
 

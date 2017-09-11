@@ -108,7 +108,10 @@ public class MapByFieldNameUtil {
             || (sourceFieldType.isPrimitive()
             && PrimitiveUtil.getWrapperClass(sourceFieldType).equals(targetFieldType))
             || (targetFieldType.isPrimitive()
-            && PrimitiveUtil.getWrapperClass(targetFieldType).equals(sourceFieldType))) {
+            && PrimitiveUtil.getWrapperClass(targetFieldType).equals(sourceFieldType))
+            || sourceFieldType.isAssignableFrom(targetFieldType)
+            || targetFieldType.isAssignableFrom(sourceFieldType)
+            ) {
 
           String fieldNameCapitalized = StringUtil.capitalizeFirstLetter(sourceFieldName);
 
