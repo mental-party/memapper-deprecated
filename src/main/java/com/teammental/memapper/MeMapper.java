@@ -1,5 +1,6 @@
 package com.teammental.memapper;
 
+import com.teammental.memapper.exception.TargetTypeInstantiationException;
 import com.teammental.memapper.util.mapping.MapByFieldNameUtil;
 
 import java.util.Optional;
@@ -29,11 +30,12 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
   /**
    * Creates a new Mapper instance.
    *
-   * @param source SourceT object which will be used
-   *               as source when mapping.
+   * @param source    SourceT object which will be used
+   *                  as source when mapping.
    * @param <SourceT> generic type of source object
    * @return a new Mapper instance.
    */
+  @Deprecated
   public static <SourceT> MapTo getMapperFrom(SourceT source) {
     return new MeMapper(source);
   }
@@ -41,11 +43,12 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
   /**
    * Creates a new Mapper instance.
    *
-   * @param sources List&lt;SourceT&gt; object which will be used
-   *                as source when mapping.
+   * @param sources   List&lt;SourceT&gt; object which will be used
+   *                  as source when mapping.
    * @param <SourceT> generic type of source object
    * @return a new Mapper instance.
    */
+  @Deprecated
   public static <SourceT> MapToList getMapperFromList(Iterable<SourceT> sources) {
     return new MeMapper(sources);
   }
@@ -71,7 +74,6 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
     }
   }
 
-
   /**
    * Maps the given source SourceT object
    * to a newly instantiated object of the given TargetType.
@@ -91,6 +93,33 @@ public class MeMapper<SourceT, TargetT> implements MapTo<TargetT>, MapToList<Tar
       return Optional.empty();
     }
   }
+
+
+  /**
+   * Creates a new Mapper instance.
+   *
+   * @param source    SourceT object which will be used
+   *                  as source when mapping.
+   * @param <SourceT> generic type of source object
+   * @return a new Mapper instance.
+   */
+  public static <SourceT> To from(SourceT source) {
+    return new MeMapperTo(source);
+  }
+
+
+  /**
+   * Creates a new Mapper instance.
+   *
+   * @param sources   List&lt;SourceT&gt; object which will be used
+   *                  as source when mapping.
+   * @param <SourceT> generic type of source object
+   * @return a new Mapper instance.
+   */
+  public static <SourceT> ToList from(Iterable<SourceT> sources) {
+    return new MeMapperToList(sources);
+  }
+
 
 
 }

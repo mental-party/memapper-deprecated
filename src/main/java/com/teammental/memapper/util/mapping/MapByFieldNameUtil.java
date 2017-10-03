@@ -2,8 +2,8 @@ package com.teammental.memapper.util.mapping;
 
 import com.teammental.memapper.exception.TargetTypeInstantiationException;
 import com.teammental.memapper.util.FieldUtil;
-import com.teammental.memapper.util.PrimitiveUtil;
-import com.teammental.memapper.util.StringUtil;
+import com.teammental.mehelper.PrimitiveHelper;
+import com.teammental.mehelper.StringHelper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -106,14 +106,14 @@ public class MapByFieldNameUtil {
 
         if (sourceFieldType.equals(targetFieldType)
             || (sourceFieldType.isPrimitive()
-            && PrimitiveUtil.getWrapperClass(sourceFieldType).equals(targetFieldType))
+            && PrimitiveHelper.getWrapperClass(sourceFieldType).equals(targetFieldType))
             || (targetFieldType.isPrimitive()
-            && PrimitiveUtil.getWrapperClass(targetFieldType).equals(sourceFieldType))
+            && PrimitiveHelper.getWrapperClass(targetFieldType).equals(sourceFieldType))
             || sourceFieldType.isAssignableFrom(targetFieldType)
             || targetFieldType.isAssignableFrom(sourceFieldType)
             ) {
 
-          String fieldNameCapitalized = StringUtil.capitalizeFirstLetter(sourceFieldName);
+          String fieldNameCapitalized = StringHelper.capitalizeFirstLetter(sourceFieldName);
 
 
           Method sourceGetMethod = null;
