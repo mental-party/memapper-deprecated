@@ -1,5 +1,8 @@
-[![Build Status](https://travis-ci.org/mental-party/memapper.svg?branch=master)](https://travis-ci.org/mental-party/memapper)
+# Note:
 
+This project is moved under [meparty](https://github.com/mental-party/meparty/tree/master/memapper)
+
+<hr/>
 
 # MeMapper
 A Simple Generic Java Bean Object Mapper
